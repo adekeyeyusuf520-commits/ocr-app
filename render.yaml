@@ -5,3 +5,7 @@ services:
     buildCommand: |
       pip install -r requirements.txt
     startCommand: gunicorn app:app
+
+    envVars:
+      - key: python_version
+        value: "3.10.13"
