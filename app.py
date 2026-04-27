@@ -7,8 +7,13 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load EasyOCR model once (important)
-reader = easyocr.Reader(['en'], gpu=False)
+reader = None
+
+def get_reader():
+    global reader
+    if reader is None:
+        reader = easyocr.Reader(['en'], gpu=False, model_storage_directory='.')
+    return reader
 
 @app.route("/")
 def home():
@@ -29,7 +34,7 @@ def extract_text():
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
 
-        result = reader.readtext(filepath, detail=0)
+        result = get_reader().readtext(filepath, detail=0)
 
         text = "\n".join(result)
 
