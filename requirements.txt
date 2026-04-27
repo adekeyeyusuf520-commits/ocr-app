@@ -1,8 +1,7 @@
-Flask
-easyocr
-Pillow
-gunicorn
-torch
-torchvision
-opencv-python-headless
-numpy
+Flask==2.3.3
+easyocr==1.7.1
+gunicorn==21.2.0
+Pillow==10.3.0
+torch==2.2.2
+torchvision==0.17.2
+numpy<2
